@@ -52,7 +52,7 @@ class ThirdFragment : Fragment() {
         binding.recycler2.layoutManager = LinearLayoutManager(context)
 
     }
-    
+
 
     companion object {
         /**
