@@ -24,10 +24,7 @@ class SecondFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        notes = Note.createNotesList(10)
-        val adapter = notesAdapter(notes)
-        binding.recycler.adapter = adapter
-        binding.recycler.layoutManager = LinearLayoutManager(context)
+
 
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
@@ -38,6 +35,10 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        notes = Note.createNotesList(30)
+        val adapter = notesAdapter(notes)
+        binding.recycler.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(context)
 
     }
 
