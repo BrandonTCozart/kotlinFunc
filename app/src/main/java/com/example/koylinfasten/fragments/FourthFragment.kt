@@ -1,4 +1,4 @@
-package com.example.koylinfasten
+package com.example.koylinfasten.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.koylinfasten.databinding.FragmentSecondBinding
-import com.example.koylinfasten.databinding.FragmentThirdBinding
+import com.example.koylinfasten.adapters.todoAdpater
+import com.example.koylinfasten.classes.Todo
+import com.example.koylinfasten.databinding.FragmentFourthBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,21 +17,18 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ThirdFragment.newInstance] factory method to
+ * Use the [FourthFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ThirdFragment : Fragment() {
-
-
-
+class FourthFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding: FragmentThirdBinding? = null
+    private var _binding: FragmentFourthBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var reminders: ArrayList<Reminder>
+    lateinit var todo: ArrayList<Todo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +40,19 @@ class ThirdFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        _binding = FragmentFourthBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        reminders = Reminder.createReminderList(30)
-        val adapter = reminderAdapter(reminders)
-        binding.recycler2.adapter = adapter
-        binding.recycler2.layoutManager = LinearLayoutManager(context)
+        todo = Todo.createReminderList(20)
+        val adapter = todoAdpater(todo)
+        binding.recycler3.adapter = adapter
+        binding.recycler3.layoutManager = LinearLayoutManager(context)
 
     }
-    
 
     companion object {
         /**
@@ -64,17 +61,16 @@ class ThirdFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ThirdFragment.
+         * @return A new instance of fragment FourthFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ThirdFragment().apply {
+            FourthFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
     }
-
 }

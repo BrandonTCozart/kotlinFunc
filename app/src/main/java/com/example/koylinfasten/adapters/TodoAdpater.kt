@@ -1,10 +1,12 @@
-package com.example.koylinfasten
+package com.example.koylinfasten.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
+import com.example.koylinfasten.R
+import com.example.koylinfasten.classes.Todo
 
 class todoAdpater (private val mReminder: List<Todo>):RecyclerView.Adapter<todoAdpater.ViewHolder>(){
 

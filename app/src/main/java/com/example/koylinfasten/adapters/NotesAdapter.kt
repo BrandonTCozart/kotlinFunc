@@ -1,10 +1,12 @@
-package com.example.koylinfasten
+package com.example.koylinfasten.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.koylinfasten.R
+import com.example.koylinfasten.classes.Note
 
 class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.ViewHolder>() {
 

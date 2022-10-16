@@ -1,4 +1,4 @@
-package com.example.koylinfasten
+package com.example.koylinfasten.interfaces
 
 interface Creation {
     var creationDate: String
