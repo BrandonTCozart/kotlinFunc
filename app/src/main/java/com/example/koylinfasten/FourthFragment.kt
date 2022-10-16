@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.koylinfasten.databinding.FragmentFourthBinding
 import com.example.koylinfasten.databinding.FragmentThirdBinding
 
@@ -26,6 +27,8 @@ class FourthFragment : Fragment() {
     private var _binding: FragmentFourthBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var todo: ArrayList<Todo>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,6 +41,16 @@ class FourthFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFourthBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        todo = Todo.createReminderList(20)
+        val adapter = todoAdpater(todo)
+        binding.recycler3.adapter = adapter
+        binding.recycler3.layoutManager = LinearLayoutManager(context)
+
     }
 
     companion object {
