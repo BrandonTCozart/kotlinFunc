@@ -10,7 +10,7 @@ class Todo(var todoText: String, var completed: Boolean, override var creationDa
                        val todos = ArrayList<Todo>()
                        for (i in 1..numTodo){
 
-                           todos.add(Todo("",false, "", ""))
+                           todos.add(Todo("Random Task",false, "", ""))
 
                        }
                        return todos

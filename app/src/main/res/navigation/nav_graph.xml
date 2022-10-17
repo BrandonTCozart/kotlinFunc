@@ -22,6 +22,8 @@
             app:destination="@id/fourthFragment" />
 
     </fragment>
+
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.koylinfasten.fragments.SecondFragment"
@@ -31,16 +33,77 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_NoteNewFragment"
+            app:destination="@id/noteNewFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_NoteEditFragment"
+            app:destination="@id/notesEditFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.example.koylinfasten.ThirdFragment"
+        android:name="com.example.koylinfasten.fragments.ThirdFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third"
-        />
+        tools:layout="@layout/fragment_third">
+        <action
+            android:id="@+id/action_thirdFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+
+
+
     <fragment
         android:id="@+id/fourthFragment"
-        android:name="com.example.koylinfasten.FourthFragment"
+        android:name="com.example.koylinfasten.fragments.FourthFragment"
         android:label="fragment_fourth"
-        tools:layout="@layout/fragment_fourth" />
+        tools:layout="@layout/fragment_fourth">
+        <action
+            android:id="@+id/action_fourthFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_fourthFragment_to_todoNewFragment"
+            app:destination="@id/todoNewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteNewFragment"
+        android:name="com.example.koylinfasten.fragments.NoteNewFragment"
+        android:label="fragment_note_new"
+        tools:layout="@layout/fragment_note_new" >
+
+        <action
+            android:id="@+id/action_noteNewFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoNewFragment"
+        android:name="com.example.koylinfasten.fragments.TodoNewFragment"
+        android:label="fragment_todo_new"
+        tools:layout="@layout/fragment_todo_new" >
+        <action
+            android:id="@+id/action_todoNewFragment_to_fourthFragment"
+            app:destination="@id/fourthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reminderNewFragment"
+        android:name="com.example.koylinfasten.fragments.reminderNewFragment"
+        android:label="fragment_reminder_new"
+        tools:layout="@layout/fragment_reminder_new" >
+        <action
+            android:id="@+id/action_reminderNewFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesEditFragment"
+        android:name="com.example.koylinfasten.fragments.NotesEditFragment"
+        android:label="fragment_notes_edit"
+        tools:layout="@layout/fragment_notes_edit" >
+        <action
+            android:id="@+id/action_notesEditFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
+
 </navigation>

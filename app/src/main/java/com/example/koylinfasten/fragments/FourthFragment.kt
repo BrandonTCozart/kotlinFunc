@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.koylinfasten.R
 import com.example.koylinfasten.adapters.todoAdpater
 import com.example.koylinfasten.classes.Todo
 import com.example.koylinfasten.databinding.FragmentFourthBinding
@@ -51,6 +53,10 @@ class FourthFragment : Fragment() {
         val adapter = todoAdpater(todo)
         binding.recycler3.adapter = adapter
         binding.recycler3.layoutManager = LinearLayoutManager(context)
+
+        binding.button3.setOnClickListener {
+            findNavController().navigate(R.id.action_fourthFragment_to_FirstFragment)
+        }
 
     }
 
