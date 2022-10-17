@@ -1,6 +1,9 @@
-package com.example.koylinfasten
+package com.example.koylinfasten.classes
 
- class Note (var title: String, var noteText: String, override var creationDate: String, override var creationTime: String) :Creation{
+import com.example.koylinfasten.interfaces.Creation
+
+class Note (var title: String, var noteText: String, override var creationDate: String, override var creationTime: String) :
+    Creation {
 
   companion object{
 

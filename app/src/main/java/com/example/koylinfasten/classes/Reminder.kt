@@ -1,6 +1,9 @@
-package com.example.koylinfasten
+package com.example.koylinfasten.classes
 
-open class Reminder(var textRemind: String, var dateRemind: String, var timeRemind: String, override var creationDate: String, override var creationTime: String):Creation {
+import com.example.koylinfasten.interfaces.Creation
+
+open class Reminder(var textRemind: String, var dateRemind: String, var timeRemind: String, override var creationDate: String, override var creationTime: String):
+    Creation {
 
     companion object{
 
