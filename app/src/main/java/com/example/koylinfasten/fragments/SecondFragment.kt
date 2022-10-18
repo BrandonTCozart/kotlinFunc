@@ -11,6 +11,11 @@ import com.example.koylinfasten.R
 import com.example.koylinfasten.classes.Note
 import com.example.koylinfasten.databinding.FragmentSecondBinding
 import com.example.koylinfasten.adapters.notesAdapter
+import com.example.koylinfasten.DBdataModel.realmDataModelObject
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.query.RealmResults
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -24,6 +29,8 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var notes: ArrayList<Note>
+    lateinit var items: RealmResults<realmDataModelObject>
+    lateinit var realm: Realm
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -38,19 +45,43 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        notes = Note.createNotesList(30)
+        val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
+            .build()
+
+        realm= Realm.open(config)
+        notes = updateRecyclerView()
+
         val adapter = notesAdapter(notes)
+
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
+
+
+
+
 
         binding.button.setOnClickListener{
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
         binding.button4.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_NoteNewFragment)
+
+            val fragment: Fragment = NoteNewFragment()
+            parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
         }
 
     }
+
+    // Function to return array of notes from db //
+    fun updateRecyclerView(): ArrayList<Note> {
+        items = realm.query<realmDataModelObject>().find()
+        var notez: ArrayList<Note> = ArrayList()
+        for(position in items){
+            notez.add(Note(position.title, position.noteText, position.note_Id, position.creationDate, position.creationTime))
+        }
+        return notez
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

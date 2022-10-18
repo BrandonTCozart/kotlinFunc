@@ -36,9 +36,6 @@
         <action
             android:id="@+id/action_SecondFragment_to_NoteNewFragment"
             app:destination="@id/noteNewFragment" />
-        <action
-            android:id="@+id/action_SecondFragment_to_NoteEditFragment"
-            app:destination="@id/notesEditFragment" />
     </fragment>
 
 
@@ -94,15 +91,6 @@
         <action
             android:id="@+id/action_reminderNewFragment_to_thirdFragment"
             app:destination="@id/thirdFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/notesEditFragment"
-        android:name="com.example.koylinfasten.fragments.NotesEditFragment"
-        android:label="fragment_notes_edit"
-        tools:layout="@layout/fragment_notes_edit" >
-        <action
-            android:id="@+id/action_notesEditFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
     </fragment>
 
 

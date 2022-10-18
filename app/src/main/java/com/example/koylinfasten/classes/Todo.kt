@@ -2,7 +2,7 @@ package com.example.koylinfasten.classes
 
 import com.example.koylinfasten.interfaces.Creation
 
-class Todo(var todoText: String, var completed: Boolean, override var creationDate: String, override var creationTime: String):
+class Todo(var todoText: String, var completed: Boolean,var todoID: String,override var creationDate: String, override var creationTime: String):
     Creation {
 
                companion object{
@@ -10,7 +10,7 @@ class Todo(var todoText: String, var completed: Boolean, override var creationDa
                        val todos = ArrayList<Todo>()
                        for (i in 1..numTodo){
 
-                           todos.add(Todo("Random Task",false, "", ""))
+                           todos.add(Todo("Random Task",false, "","", ""))
 
                        }
                        return todos

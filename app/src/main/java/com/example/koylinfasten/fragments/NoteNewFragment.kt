@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.FragmentNoteNewBinding
-import com.example.koylinfasten.databinding.FragmentThirdBinding
+import com.example.koylinfasten.DBdataModel.realmDataModelObject
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,14 +48,41 @@ class NoteNewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var calendar: Calendar = Calendar.getInstance()
+
+        val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
+            .build()
+        val realm: Realm = Realm.open(config)
+
+
         binding.button5.setOnClickListener {
             findNavController().navigate(R.id.action_noteNewFragment_to_SecondFragment)
         }
 
         binding.button6.setOnClickListener {
+            var titleOfNew = binding.editTextTextPersonName2.text.toString()
+            var textOfNew = binding.editTextTextMultiLine.text.toString()
+
+            realm.writeBlocking {
+                copyToRealm(realmDataModelObject().apply {
+                    title = titleOfNew
+                    noteText = textOfNew
+                    creationDate = calendar.time.toString()
+                    creationTime = calendar.time.toString()
+                })
+            }
+            realm.close()
+
+            //findNavController().navigate(R.id.action_noteNewFragment_to_SecondFragment)
+
+            val fragment: Fragment = SecondFragment()
+
+            parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
+
 
         }
     }
+
 
     companion object {
         /**

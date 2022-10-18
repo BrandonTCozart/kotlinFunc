@@ -43,4 +43,8 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
         return mNotes.size
     }
 
+    fun delete(){
+
+    }
+
 }
