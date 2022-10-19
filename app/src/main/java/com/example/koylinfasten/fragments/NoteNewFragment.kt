@@ -47,8 +47,10 @@ class NoteNewFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
         setFragmentResultListener("requestKey"){ requestKey, bundle ->
             var position = bundle.getInt("bundleKey")
+
             binding.editTextTextPersonName2.setText(notes[position].title)
             binding.editTextTextMultiLine.setText(notes[position].noteText)
         }

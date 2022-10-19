@@ -48,6 +48,7 @@ class SecondFragment : Fragment() {
             .build()
 
         realm= Realm.open(config)
+
         notes = updateRecyclerView()
 
         val adapter = notesAdapter(notes)
@@ -60,6 +61,8 @@ class SecondFragment : Fragment() {
         binding.button.setOnClickListener{
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
+
 
         binding.button4.setOnClickListener {
 

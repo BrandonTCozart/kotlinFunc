@@ -22,7 +22,6 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
     }
 
    fun setOnItemClickListener(listener: onItemClickListener){
-
        mListener = listener
    }
     // On Click Listener //
