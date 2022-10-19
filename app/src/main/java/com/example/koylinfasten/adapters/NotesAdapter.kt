@@ -10,11 +10,37 @@ import com.example.koylinfasten.classes.Note
 
 class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+    // On Click Listener //
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position: Int){
+
+        }
+    }
+
+   fun setOnItemClickListener(listener: onItemClickListener){
+
+       mListener = listener
+   }
+    // On Click Listener //
+
+
+    inner class ViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
 
         val noteTitleBox = itemView.findViewById<TextView>(R.id.textTitle)
         val noteTextBox = itemView.findViewById<TextView>(R.id.textViewText)
 
+        // on Click Listener //
+        init {
+
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+
+        }
+        // On Click Listener //
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +49,7 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
         val inflater = LayoutInflater.from(context)
         val contactView = inflater.inflate(R.layout.note_layout, parent, false)
 
-        return ViewHolder(contactView)
+        return ViewHolder(contactView, /* On click Listener */ mListener)
 
     }
 
@@ -43,8 +69,6 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
         return mNotes.size
     }
 
-    fun delete(){
 
-    }
 
 }

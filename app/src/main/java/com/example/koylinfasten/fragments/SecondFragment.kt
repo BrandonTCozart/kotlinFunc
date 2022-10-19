@@ -53,8 +53,13 @@ class SecondFragment : Fragment() {
 
         val adapter = notesAdapter(notes)
 
+
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
+
+
+
+
 
 
 
@@ -69,6 +74,19 @@ class SecondFragment : Fragment() {
             val fragment: Fragment = NoteNewFragment()
             parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
         }
+
+        // OnClickListener //
+        adapter.setOnItemClickListener(object : notesAdapter.onItemClickListener{
+
+            override fun onItemClick(position: Int) {
+
+
+
+            }
+
+        })
+
+
 
     }
 
