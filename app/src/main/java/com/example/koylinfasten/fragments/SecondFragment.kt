@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.koylinfasten.R
@@ -34,9 +36,6 @@ class SecondFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
-
-
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -58,13 +57,6 @@ class SecondFragment : Fragment() {
         binding.recycler.layoutManager = LinearLayoutManager(context)
 
 
-
-
-
-
-
-
-
         binding.button.setOnClickListener{
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
@@ -75,19 +67,23 @@ class SecondFragment : Fragment() {
             parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
         }
 
+
         // OnClickListener //
         adapter.setOnItemClickListener(object : notesAdapter.onItemClickListener{
 
             override fun onItemClick(position: Int) {
 
+                setFragmentResult("requestKey", bundleOf("bundleKey" to position))
 
+
+                val fragment: Fragment = NoteNewFragment()
+                parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
 
             }
 
         })
 
-
-
+        realm.close()
     }
 
     // Function to return array of notes from db //
@@ -95,10 +91,12 @@ class SecondFragment : Fragment() {
         items = realm.query<realmDataModelObject>().find()
         var notez: ArrayList<Note> = ArrayList()
         for(position in items){
-            notez.add(Note(position.title, position.noteText, position.note_Id, position.creationDate, position.creationTime))
+            notez.add(Note(position.title, position.noteText, position.note_Id,position.creationTime))
         }
         return notez
     }
+
+
 
 
     override fun onDestroyView() {

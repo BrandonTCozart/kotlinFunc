@@ -5,7 +5,6 @@ import com.example.koylinfasten.interfaces.Creation
 class Note (var title: String,
             var noteText: String,
             var noteID: String,
-            override var creationDate: String,
             override var creationTime: String) :
     Creation {
 
@@ -15,7 +14,7 @@ class Note (var title: String,
      val notez = ArrayList<Note>()
      for (i in 1..numNotes){
 
-      notez.add(Note("Note $i", " Random Text ", "", " ", ""))
+      notez.add(Note("Note $i", " Random Text ", "", " "))
 
      }
      return notez

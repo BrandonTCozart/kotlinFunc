@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koylinfasten.R
 import com.example.koylinfasten.classes.Note
+import org.w3c.dom.Text
 
 class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.ViewHolder>() {
 
@@ -31,6 +32,7 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
 
         val noteTitleBox = itemView.findViewById<TextView>(R.id.textTitle)
         val noteTextBox = itemView.findViewById<TextView>(R.id.textViewText)
+        val noteTimeTextBox = itemView.findViewById<TextView>(R.id.textView2)
 
         // on Click Listener //
         init {
@@ -63,6 +65,8 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
         val textViewText = holder.noteTextBox
         textViewText.text = note.noteText
 
+        val textViewTime = holder.noteTimeTextBox
+        textViewTime.text = note.creationTime
     }
 
     override fun getItemCount(): Int {

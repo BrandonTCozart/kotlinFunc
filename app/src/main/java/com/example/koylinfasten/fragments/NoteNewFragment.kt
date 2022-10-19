@@ -5,12 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.FragmentNoteNewBinding
 import com.example.koylinfasten.DBdataModel.realmDataModelObject
+import com.example.koylinfasten.classes.Note
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.query.RealmResults
 import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,11 +36,21 @@ class NoteNewFragment : Fragment() {
     private var _binding: FragmentNoteNewBinding? = null
     private val binding get() = _binding!!
 
+
+    lateinit var notes: ArrayList<Note>
+    lateinit var items: RealmResults<realmDataModelObject>
+    lateinit var realm: Realm
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+        setFragmentResultListener("requestKey"){ requestKey, bundle ->
+            var position = bundle.getInt("bundleKey")
+            binding.editTextTextPersonName2.setText(notes[position].title)
+            binding.editTextTextMultiLine.setText(notes[position].noteText)
         }
     }
 
@@ -48,15 +63,21 @@ class NoteNewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var calendar: Calendar = Calendar.getInstance()
-
         val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
             .build()
+
+        realm= Realm.open(config)
+        notes = updateRecyclerView()
+
         val realm: Realm = Realm.open(config)
 
 
+        var calendar: Calendar = Calendar.getInstance()
+
+
         binding.button5.setOnClickListener {
-            findNavController().navigate(R.id.action_noteNewFragment_to_SecondFragment)
+            val fragment: Fragment = SecondFragment()
+            parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
         }
 
         binding.button6.setOnClickListener {
@@ -67,20 +88,26 @@ class NoteNewFragment : Fragment() {
                 copyToRealm(realmDataModelObject().apply {
                     title = titleOfNew
                     noteText = textOfNew
-                    creationDate = calendar.time.toString()
                     creationTime = calendar.time.toString()
                 })
             }
             realm.close()
 
-            //findNavController().navigate(R.id.action_noteNewFragment_to_SecondFragment)
 
             val fragment: Fragment = SecondFragment()
-
             parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
 
 
         }
+    }
+
+    fun updateRecyclerView(): ArrayList<Note> {
+        items = realm.query<realmDataModelObject>().find()
+        var notez: ArrayList<Note> = ArrayList()
+        for(position in items){
+            notez.add(Note(position.title, position.noteText, position.note_Id, position.creationTime))
+        }
+        return notez
     }
 
 

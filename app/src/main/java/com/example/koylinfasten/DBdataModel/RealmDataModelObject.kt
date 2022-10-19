@@ -11,7 +11,6 @@ class realmDataModelObject() : RealmObject {
     var title: String = ""
     var noteText: String = ""
     @PrimaryKey var note_Id: String = ObjectId.create().toString()
-    var creationDate: String = ""
     var creationTime: String = ""
 
     constructor(noteId: String = ""): this(){
