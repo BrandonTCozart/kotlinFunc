@@ -3,6 +3,7 @@ package com.example.koylinfasten.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koylinfasten.R
@@ -16,7 +17,12 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
     private lateinit var mListener: onItemClickListener
 
     interface onItemClickListener{
+
         fun onItemClick(position: Int){
+
+        }
+
+        fun onDeleteButtonClick(position: Int){
 
         }
     }
@@ -24,6 +30,8 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
    fun setOnItemClickListener(listener: onItemClickListener){
        mListener = listener
    }
+
+
     // On Click Listener //
 
 
@@ -33,11 +41,18 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
         val noteTextBox = itemView.findViewById<TextView>(R.id.textViewText)
         val noteTimeTextBox = itemView.findViewById<TextView>(R.id.textView2)
 
+        val deleteButton = itemView.findViewById<Button>(R.id.button9)
+
         // on Click Listener //
         init {
 
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
+            }
+
+
+            deleteButton.setOnClickListener {
+                listener.onDeleteButtonClick(adapterPosition)
             }
 
         }
@@ -53,6 +68,7 @@ class notesAdapter (val mNotes: List<Note>) : RecyclerView.Adapter<notesAdapter.
         return ViewHolder(contactView, /* On click Listener */ mListener)
 
     }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
