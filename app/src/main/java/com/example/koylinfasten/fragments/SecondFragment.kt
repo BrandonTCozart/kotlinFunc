@@ -49,21 +49,22 @@ class SecondFragment : Fragment() {
 
         val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
             .build()
+
         realm = Realm.open(config)
 
         updateRecyclerView()
-
-        // Here is the problem
         adapter = notesAdapter(notes)
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
-        //Here is the problem
+
 
 
 
         binding.button.setOnClickListener{
+
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
 
 
 
@@ -75,8 +76,10 @@ class SecondFragment : Fragment() {
 
 
 
+
         // OnClickListeners //
         adapter.setOnItemClickListener(object : notesAdapter.onItemClickListener{
+
 
             override fun onItemClick(position: Int) {
 
@@ -88,26 +91,23 @@ class SecondFragment : Fragment() {
 
             }
 
+
             override fun onDeleteButtonClick(position: Int) {
 
                 realm.writeBlocking {
                     val writeTransactionItems = query<realmDataModelObject>().find()
                     delete(writeTransactionItems[position])
                 }
-
-                updateRecyclerView()
-                adapter.notifyItemRemoved(position)
-
+                val fragment: Fragment = SecondFragment()
+                parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
 
             }
 
         })
-
         // OnClickListeners //
-
-
-
     }
+
+
 
 
     // Function to return array of notes from db //
@@ -118,7 +118,6 @@ class SecondFragment : Fragment() {
             notez.add(Note(position.title, position.noteText, position.note_Id,position.creationTime))
         }
         notes = notez
-
     }
 
 
