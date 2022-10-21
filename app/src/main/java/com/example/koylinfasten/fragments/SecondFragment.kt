@@ -50,7 +50,6 @@ class SecondFragment : Fragment() {
 
         val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
             .build()
-
         realm = Realm.open(config)
 
         updateRecyclerView()

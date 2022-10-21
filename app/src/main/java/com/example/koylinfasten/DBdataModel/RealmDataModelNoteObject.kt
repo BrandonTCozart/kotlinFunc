@@ -1,8 +1,5 @@
 package com.example.koylinfasten.DBdataModel
 
-import android.content.ClipData
-import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.types.ObjectId
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
