@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
@@ -31,8 +32,9 @@ class SecondFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var notes: ArrayList<Note>
-    lateinit var items: RealmResults<realmDataModelObject>
     lateinit var realm: Realm
+    lateinit var adapter: notesAdapter
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -41,26 +43,28 @@ class SecondFragment : Fragment() {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
             .build()
 
-        realm= Realm.open(config)
+        realm = Realm.open(config)
 
-        notes = updateRecyclerView()
-
-        val adapter = notesAdapter(notes)
-
-
+        updateRecyclerView()
+        adapter = notesAdapter(notes)
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
 
 
+
+
         binding.button.setOnClickListener{
+
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
 
 
 
@@ -71,8 +75,11 @@ class SecondFragment : Fragment() {
         }
 
 
-        // OnClickListener //
+
+
+        // OnClickListeners //
         adapter.setOnItemClickListener(object : notesAdapter.onItemClickListener{
+
 
             override fun onItemClick(position: Int) {
 
@@ -84,19 +91,33 @@ class SecondFragment : Fragment() {
 
             }
 
-        })
 
-        realm.close()
+            override fun onDeleteButtonClick(position: Int) {
+
+                realm.writeBlocking {
+                    val writeTransactionItems = query<realmDataModelObject>().find()
+                    delete(writeTransactionItems[position])
+                }
+                val fragment: Fragment = SecondFragment()
+                parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
+
+            }
+
+        })
+        // OnClickListeners //
     }
 
+
+
+
     // Function to return array of notes from db //
-    fun updateRecyclerView(): ArrayList<Note> {
-        items = realm.query<realmDataModelObject>().find()
+    fun updateRecyclerView() {
+        var items: RealmResults<realmDataModelObject> = realm.query<realmDataModelObject>().find()
         var notez: ArrayList<Note> = ArrayList()
         for(position in items){
             notez.add(Note(position.title, position.noteText, position.note_Id,position.creationTime))
         }
-        return notez
+        notes = notez
     }
 
 
