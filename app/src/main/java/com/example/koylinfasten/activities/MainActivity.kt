@@ -1,5 +1,6 @@
 package com.example.koylinfasten.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -7,8 +8,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.ActivityMainBinding
+import com.example.koylinfasten.fragments.FirstFragment
+import com.example.koylinfasten.interfaces.IActivityTransaction
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IActivityTransaction{
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -33,7 +37,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
+    override fun toNextActivity() {
+        val intent = Intent(this, MainActivity2::class.java)
+        startActivity(intent)
+    }
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.koylinfasten.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.FragmentFirstBinding
+import com.example.koylinfasten.interfaces.IActivityTransaction
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -39,6 +41,9 @@ class FirstFragment : Fragment() {
         binding.buttonToTodos.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_fourthFragment)
         }
+        binding.buttonNextActivity.setOnClickListener {
+            Ilistener.toNextActivity()
+        }
 
 
     }
@@ -47,4 +52,19 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+    lateinit var Ilistener: IActivityTransaction
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is IActivityTransaction){
+            Ilistener = context as IActivityTransaction
+        }else{
+            throw java.lang.RuntimeException("must apply context")
+        }
+    }
+
+
+
 }
