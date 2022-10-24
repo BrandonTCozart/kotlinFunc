@@ -6,16 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModel
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.FragmentNoteNewBinding
 import com.example.koylinfasten.DBdataModel.realmDataModelObject
+import com.example.koylinfasten.ViewModels.NoteModel
 import com.example.koylinfasten.classes.Note
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
-import io.realm.kotlin.ext.query
 import io.realm.kotlin.query.RealmResults
 import java.util.Calendar
 
@@ -34,8 +34,9 @@ class NoteNewFragment : Fragment() {
 
 
     lateinit var notes: ArrayList<Note>
-    lateinit var items: RealmResults<realmDataModelObject>
     lateinit var realm: Realm
+
+    private val viewModel: NoteModel by activityViewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +49,8 @@ class NoteNewFragment : Fragment() {
 
         setFragmentResultListener("requestKey"){ requestKey, bundle ->
             var position = bundle.getInt("bundleKey")
+
+            notes = viewModel.updateListOfNotes()
 
             binding.editTextTextPersonName2.setText(notes[position].title)
             binding.editTextTextMultiLine.setText(notes[position].noteText)
@@ -65,14 +68,6 @@ class NoteNewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
-            .build()
-        realm= Realm.open(config)
-
-        val realm: Realm = Realm.open(config)
-        var calendar: Calendar = Calendar.getInstance()
-
-
 
         binding.button5.setOnClickListener {
             val fragment: Fragment = SecondFragment()
@@ -84,23 +79,17 @@ class NoteNewFragment : Fragment() {
             var titleOfNew = binding.editTextTextPersonName2.text.toString()
             var textOfNew = binding.editTextTextMultiLine.text.toString()
 
-            if(!titleOfNew.isEmpty() && !textOfNew.isEmpty()) {
+            if(viewModel.validateNotEmpty(titleOfNew, textOfNew)){
 
-                realm.writeBlocking {
-                    copyToRealm(realmDataModelObject().apply {
-                        title = titleOfNew
-                        noteText = textOfNew
-                        creationTime = calendar.time.toString()
-                    })
-                }
-                realm.close()
+                viewModel.writeNewNoteToDatabase(titleOfNew, textOfNew)
 
                 val fragment: Fragment = SecondFragment()
                 parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
-
             }else{
                 Toast.makeText(context, "Fields must not be empty", Toast.LENGTH_SHORT).show()
+
             }
+
         }
     }
 

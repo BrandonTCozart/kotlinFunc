@@ -5,10 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import androidx.navigation.fragment.findNavController
+import com.example.koylinfasten.DBdataModel.realmDataModelObject
+import com.example.koylinfasten.DBdataModel.realmDataModelReminderObject
 import com.example.koylinfasten.R
+import com.example.koylinfasten.adapters.notesAdapter
+import com.example.koylinfasten.adapters.reminderAdapter
+import com.example.koylinfasten.classes.Note
+import com.example.koylinfasten.classes.Reminder
 import com.example.koylinfasten.databinding.FragmentNoteNewBinding
 import com.example.koylinfasten.databinding.FragmentReminderNewBinding
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
+import io.realm.kotlin.ext.query
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +40,10 @@ class reminderNewFragment : Fragment() {
     private var _binding: FragmentReminderNewBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var realm: Realm
+    lateinit var notes: ArrayList<Reminder>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,6 +61,16 @@ class reminderNewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val config = RealmConfiguration.Builder(schema = setOf(realmDataModelReminderObject::class))
+            .build()
+        val realm = Realm.open(config)
+
+        var calendar: Calendar = Calendar.getInstance()
+
+
+
+
+
         binding.button10.setOnClickListener {
 
             findNavController().navigate(R.id.action_reminderNewFragment_to_thirdFragment)
@@ -53,6 +79,19 @@ class reminderNewFragment : Fragment() {
 
         binding.button11.setOnClickListener {
 
+            var reminderText = binding.editTextTextPersonName.text.toString()
+
+            realm.writeBlocking {
+                copyToRealm(realmDataModelReminderObject().apply {
+                    textRemind = reminderText
+                    creationTime = calendar.time.toString()
+                })
+            }
+
+            realm.close()
+
+            val fragment: Fragment = ThirdFragment()
+            parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main2, fragment)?.commit()
         }
 
     }
@@ -76,4 +115,6 @@ class reminderNewFragment : Fragment() {
                 }
             }
     }
+
+
 }

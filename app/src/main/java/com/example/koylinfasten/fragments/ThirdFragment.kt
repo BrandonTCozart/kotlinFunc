@@ -54,6 +54,10 @@ class ThirdFragment : Fragment() {
         binding.button2.setOnClickListener {
             findNavController().navigate(R.id.action_thirdFragment_to_FirstFragment)
         }
+        binding.button12.setOnClickListener{
+            val fragment: Fragment = reminderNewFragment()
+            parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
+        }
 
     }
 
