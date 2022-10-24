@@ -35,12 +35,7 @@ class FirstFragment : Fragment() {
         binding.buttonToNotes.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        binding.buttonToReminders.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_ThirdFragment)
-        }
-        binding.buttonToTodos.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_fourthFragment)
-        }
+
         binding.buttonNextActivity.setOnClickListener {
             Ilistener.toNextActivity()
         }

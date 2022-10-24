@@ -19,36 +19,14 @@
         app:layout_constraintVertical_bias="0.347" />
 
     <Button
-        android:id="@+id/buttonToReminders"
-        android:layout_width="413dp"
-        android:layout_height="59dp"
-        android:text="Reminders"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonToNotes"
-        app:layout_constraintStart_toStartOf="@+id/buttonToNotes"
-        app:layout_constraintTop_toBottomOf="@+id/buttonToNotes"
-        app:layout_constraintVertical_bias="0.09" />
-
-    <Button
-        android:id="@+id/buttonToTodos"
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:text="Todos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonToReminders"
-        app:layout_constraintStart_toStartOf="@+id/buttonToReminders"
-        app:layout_constraintTop_toBottomOf="@+id/buttonToReminders"
-        app:layout_constraintVertical_bias="0.127" />
-
-    <Button
         android:id="@+id/buttonNextActivity"
         android:layout_width="match_parent"
         android:layout_height="61dp"
         android:text="Next Activity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonToTodos"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonToNotes"
+        app:layout_constraintVertical_bias="0.208" />
 </androidx.constraintlayout.widget.ConstraintLayout>

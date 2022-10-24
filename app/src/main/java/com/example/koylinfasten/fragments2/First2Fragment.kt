@@ -45,7 +45,7 @@ class First2Fragment : Fragment() {
                 val result = quotesApi.getQuotes() // results equals a resonse<quotelist>
                 if (result != null)
                 // Checking the results
-                // Log.d("B: ", result.body().toString()) // .body gives the The deserialized response body of a successful response.
+                //.body gives the The deserialized response body of a successful response.
                 binding.editTextTextPersonName3.setText(result.body().toString())
 
             }
