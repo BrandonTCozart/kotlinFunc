@@ -46,7 +46,7 @@ class First2Fragment : Fragment() {
                 if (result != null)
                 // Checking the results
                 //.body gives the The deserialized response body of a successful response.
-                binding.editTextTextPersonName3.setText(result.body().toString())
+                binding.editTextTextPersonName3.setText(result.body()?.results?.get(1)?.author.toString()) // bingo
 
             }
 

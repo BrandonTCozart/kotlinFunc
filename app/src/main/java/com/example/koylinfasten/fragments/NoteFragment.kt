@@ -19,7 +19,7 @@ import com.example.koylinfasten.ViewModels.NoteModel
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class NoteFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
@@ -75,7 +75,7 @@ class SecondFragment : Fragment() {
 
                 viewModel.deleteNote(position)
 
-                val fragment: Fragment = SecondFragment()
+                val fragment: Fragment = NoteFragment()
                 parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
 
             }

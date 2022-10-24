@@ -8,16 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
-import androidx.lifecycle.ViewModel
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.FragmentNoteNewBinding
-import com.example.koylinfasten.DBdataModel.realmDataModelObject
 import com.example.koylinfasten.ViewModels.NoteModel
 import com.example.koylinfasten.classes.Note
 import io.realm.kotlin.Realm
-import io.realm.kotlin.RealmConfiguration
-import io.realm.kotlin.query.RealmResults
-import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,7 +65,7 @@ class NoteNewFragment : Fragment() {
 
 
         binding.button5.setOnClickListener {
-            val fragment: Fragment = SecondFragment()
+            val fragment: Fragment = NoteFragment()
             parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
         }
 
@@ -83,7 +78,7 @@ class NoteNewFragment : Fragment() {
 
                 viewModel.writeNewNoteToDatabase(titleOfNew, textOfNew)
 
-                val fragment: Fragment = SecondFragment()
+                val fragment: Fragment = NoteFragment()
                 parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
             }else{
                 Toast.makeText(context, "Fields must not be empty", Toast.LENGTH_SHORT).show()

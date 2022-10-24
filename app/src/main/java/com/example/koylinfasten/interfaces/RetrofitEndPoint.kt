@@ -12,4 +12,6 @@ interface RetrofitEndPoint {
     //This one is not an end point its just another example
     @GET("/end")
     suspend fun getSomethinElse() : Response<QuoteList>
+
+
 }
