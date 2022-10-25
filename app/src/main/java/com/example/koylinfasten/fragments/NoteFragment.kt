@@ -48,12 +48,10 @@ class NoteFragment : Fragment() {
 
 
         binding.button.setOnClickListener{
-
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 
         binding.button4.setOnClickListener {
-
             val fragment: Fragment = NoteNewFragment()
             parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
         }
@@ -67,6 +65,7 @@ class NoteFragment : Fragment() {
 
                 val fragment: Fragment = NoteNewFragment()
                 parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
+
 
             }
 

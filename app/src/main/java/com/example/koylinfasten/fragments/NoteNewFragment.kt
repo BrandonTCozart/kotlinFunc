@@ -77,9 +77,9 @@ class NoteNewFragment : Fragment() {
             if(viewModel.validateNotEmpty(titleOfNew, textOfNew)){
 
                 viewModel.writeNewNoteToDatabase(titleOfNew, textOfNew)
-
                 val fragment: Fragment = NoteFragment()
                 parentFragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment_content_main, fragment)?.commit()
+
             }else{
                 Toast.makeText(context, "Fields must not be empty", Toast.LENGTH_SHORT).show()
 

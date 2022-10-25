@@ -26,9 +26,6 @@ class MainActivity : AppCompatActivity(), IActivityTransaction{
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
