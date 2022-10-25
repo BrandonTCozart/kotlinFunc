@@ -1,19 +1,16 @@
 package com.example.koylinfasten.fragments2
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.koylinfasten.Objects.RetrofitHelper
-import com.example.koylinfasten.R
+import androidx.fragment.app.activityViewModels
+import com.example.koylinfasten.ViewModels.QuoteModel
 import com.example.koylinfasten.databinding.FragmentFirst2Binding
-import com.example.koylinfasten.interfaces.RetrofitEndPoint
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.json.JSONObject
+import kotlinx.coroutines.runBlocking
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -25,6 +22,8 @@ class First2Fragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var index : Int = 0
+    private val quoteModel: QuoteModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -38,20 +37,9 @@ class First2Fragment : Fragment() {
 
         binding.button13.setOnClickListener{
 
-            // RetroFit //
-            val quotesApi = RetrofitHelper.getInstance().create(RetrofitEndPoint::class.java)
-            // launching a new coroutine
-            GlobalScope.launch {
-                val result = quotesApi.getQuotes() // results equals a resonse<quotelist>
-                if (result != null)
-                // Checking the results
-                //.body gives the The deserialized response body of a successful response.
-                binding.editTextTextPersonName3.setText(result.body()?.results?.get(1)?.author.toString()) // bingo
+            binding.textView.setText(quoteModel.quoteGet())
+            binding.editTextTextPersonName3.setText(quoteModel.authorGet())
 
-            }
-
-
-            // Retrofit //
         }
 
 

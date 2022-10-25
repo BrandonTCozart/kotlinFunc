@@ -37,7 +37,7 @@ class FirstFragment : Fragment() {
         }
 
         binding.buttonNextActivity.setOnClickListener {
-            Ilistener.toNextActivity()
+            Ilistener.toNextActivity() //Main Activity .toNextActivity
         }
 
 
@@ -54,7 +54,7 @@ class FirstFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if(context is IActivityTransaction){
-            Ilistener = context as IActivityTransaction
+            Ilistener = context // Ilistener is equal to the context which is the main activity
         }else{
             throw java.lang.RuntimeException("must apply context")
         }
