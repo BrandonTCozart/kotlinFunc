@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
 class NoteModel: ViewModel() {
 
     lateinit var realm: Realm
-    lateinit var notes: ArrayList<Note>
+    //lateinit var notes: ArrayList<Note>
 
 
 

@@ -33,6 +33,8 @@ class QuoteModel : ViewModel() {
     }
 
 
+
+
     fun quoteGet(): String{
         // RetroFit //
         // launching a new coroutine
