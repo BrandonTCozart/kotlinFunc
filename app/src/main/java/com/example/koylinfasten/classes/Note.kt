@@ -9,7 +9,7 @@ class Note (var title: String,
     Creation {
 
 
-  companion object{
+    companion object{
     fun createNotesList(numNotes: Int): ArrayList<Note>{
      val notez = ArrayList<Note>()
      for (i in 1..numNotes){

@@ -40,6 +40,10 @@ class FirstFragment : Fragment() {
             Ilistener.toNextActivity() //Main Activity .toNextActivity
         }
 
+        binding.button16.setOnClickListener{
+            Ilistener.toPostActivity()
+        }
+
 
     }
 

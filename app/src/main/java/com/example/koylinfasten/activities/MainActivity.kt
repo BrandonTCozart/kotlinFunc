@@ -39,5 +39,11 @@ class MainActivity : AppCompatActivity(), IActivityTransaction{
         startActivity(intent)
     }
 
+    override fun toPostActivity() {
+        val intent = Intent(this, MainActivity4::class.java)
+        startActivity(intent)
+
+    }
+
 
 }

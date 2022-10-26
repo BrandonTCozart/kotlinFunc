@@ -26,7 +26,7 @@ class First3Fragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SignatureViewModel::class.java)
         // TODO: Use the ViewModel
-        
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
