@@ -1,5 +1,6 @@
 package com.example.koylinfasten.activities
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.koylinfasten.R
 //import com.example.koylinfasten.activities.databinding.ActivityMain4Binding
 import com.example.koylinfasten.databinding.ActivityMain4Binding
+import com.example.koylinfasten.interfaces.IActivityTransaction
 
-class MainActivity4 : AppCompatActivity() {
+class MainActivity4 : AppCompatActivity(), IActivityTransaction {
 
     /* Task/operation Scheduler */
 
@@ -24,17 +26,17 @@ class MainActivity4 : AppCompatActivity() {
         binding = ActivityMain4Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        //setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_main3)
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main3)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+
+    override fun toFirstActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.koylinfasten.fragments2
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.koylinfasten.ViewModels.QuoteModel
 import com.example.koylinfasten.databinding.FragmentFirst2Binding
+import com.example.koylinfasten.interfaces.IActivityTransaction
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -42,11 +44,26 @@ class First2Fragment : Fragment() {
 
         }
 
+        binding.button23.setOnClickListener {
+            Ilistener.toFirstActivity()
+        }
+
 
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    lateinit var Ilistener: IActivityTransaction
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is IActivityTransaction){
+            Ilistener = context // Ilistener is equal to the context which is the main activity
+        }else{
+            throw java.lang.RuntimeException("must apply context")
+        }
     }
 }

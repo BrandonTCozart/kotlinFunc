@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.koylinfasten.R
 import com.example.koylinfasten.classes.Post
 
-class PostAdapter(private val mPostArray: ArrayList<Post>): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(val mPostArray: ArrayList<Post>): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Your holder should contain and initialize a member variable
-        // for any view that will be set as you render a row
         val postTitle = itemView.findViewById<TextView>(R.id.textView4)
         val postDate = itemView.findViewById<TextView>(R.id.textView5)
     }
@@ -21,9 +19,9 @@ class PostAdapter(private val mPostArray: ArrayList<Post>): RecyclerView.Adapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        val contactView = inflater.inflate(R.layout.note_layout, parent, false)
+        val contactView2 = inflater.inflate(R.layout.post_layout, parent, false)
 
-        return ViewHolder(contactView)
+        return ViewHolder(contactView2)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

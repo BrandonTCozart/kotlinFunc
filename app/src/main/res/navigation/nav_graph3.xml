@@ -18,5 +18,9 @@
         android:id="@+id/fragment4Fragment"
         android:name="com.example.koylinfasten.fragments4.Fragment4Fragment"
         android:label="fragment_fragment4"
-        tools:layout="@layout/fragment_fragment4" />
+        tools:layout="@layout/fragment_fragment4" >
+        <action
+            android:id="@+id/action_fragment4Fragment_to_First4Fragment"
+            app:destination="@id/First4Fragment" />
+    </fragment>
 </navigation>

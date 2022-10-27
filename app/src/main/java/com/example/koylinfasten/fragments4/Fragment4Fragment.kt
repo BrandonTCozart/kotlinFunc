@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.koylinfasten.R
 import com.example.koylinfasten.ViewModels.NoteModel
@@ -28,7 +29,9 @@ private const val ARG_PARAM2 = "param2"
 class Fragment4Fragment : Fragment() {
     private var _binding: FragmentFragment4Binding? = null
     private val binding get() = _binding!!
+
     lateinit var posts: ArrayList<Post>
+    lateinit var adapter: PostAdapter
     private val postModel: PostModel by activityViewModels()
 
 
@@ -40,28 +43,32 @@ class Fragment4Fragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        posts = postModel.getPosts()
+        adapter = PostAdapter(posts)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentFragment4Binding.inflate(inflater, container, false)
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        posts = postModel.getPosts()
-        val adapter = PostAdapter(posts)
         binding.postRecycler.adapter = adapter
         binding.postRecycler.layoutManager = LinearLayoutManager(context)
 
+        binding.button21.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment4Fragment_to_First4Fragment)
+        }
+
+        return binding.root
     }
+
 
 
 

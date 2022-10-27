@@ -1,5 +1,6 @@
 package com.example.koylinfasten.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +10,12 @@ import androidx.navigation.ui.navigateUp
 import com.example.koylinfasten.Objects.RetrofitHelper
 import com.example.koylinfasten.R
 import com.example.koylinfasten.databinding.ActivityMain2Binding
+import com.example.koylinfasten.interfaces.IActivityTransaction
 import com.example.koylinfasten.interfaces.RetrofitEndPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity2 : AppCompatActivity() {
+class MainActivity2 : AppCompatActivity(), IActivityTransaction {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMain2Binding
@@ -37,4 +39,11 @@ class MainActivity2 : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    override fun toFirstActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+
 }
