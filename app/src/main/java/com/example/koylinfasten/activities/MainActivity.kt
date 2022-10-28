@@ -45,5 +45,10 @@ class MainActivity : AppCompatActivity(), IActivityTransaction{
 
     }
 
+    override fun toThreadActivity() {
+        val intent = Intent(this, MainActivity5::class.java)
+        startActivity(intent)
+    }
+
 
 }

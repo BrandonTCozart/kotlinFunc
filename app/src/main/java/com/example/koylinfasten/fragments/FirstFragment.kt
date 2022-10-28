@@ -43,6 +43,9 @@ class FirstFragment : Fragment() {
         binding.button16.setOnClickListener{
             Ilistener.toPostActivity()
         }
+        binding.button24.setOnClickListener {
+            Ilistener.toThreadActivity()
+        }
 
 
     }
