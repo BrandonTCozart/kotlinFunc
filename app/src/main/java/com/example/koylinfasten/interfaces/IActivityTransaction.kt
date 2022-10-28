@@ -4,4 +4,5 @@ interface IActivityTransaction {
     fun toNextActivity() {}
     fun toPostActivity(){}
     fun toFirstActivity(){}
+    fun toThreadActivity(){}
 }

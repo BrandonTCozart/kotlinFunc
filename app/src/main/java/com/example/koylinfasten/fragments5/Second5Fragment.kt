@@ -1,4 +1,4 @@
-package com.example.koylinfasten.fragments2
+package com.example.koylinfasten.fragments5
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.koylinfasten.R
-import com.example.koylinfasten.databinding.FragmentSecond2Binding
-//import com.example.koylinfasten.activities.databinding.FragmentSecond2Binding
+//mport com.example.koylinfasten.activities.databinding.FragmentSecond4Binding
+import com.example.koylinfasten.databinding.FragmentSecond5Binding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class Second2Fragment : Fragment() {
+class Second5Fragment : Fragment() {
 
-    private var _binding: FragmentSecond2Binding? = null
+    private var _binding: FragmentSecond5Binding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,7 +26,7 @@ class Second2Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecond2Binding.inflate(inflater, container, false)
+        _binding = FragmentSecond5Binding.inflate(inflater, container, false)
         return binding.root
 
     }
