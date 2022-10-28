@@ -11,17 +11,47 @@ import com.example.koylinfasten.classes.Post
 
 class PostAdapter(val mPostArray: ArrayList<Post>): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    // On Click Listener //
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener{
+
+        fun onItemClick(position: Int){
+
+        }
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener
+    }
+    // On Click Listener //
+
+
+
+    inner class ViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val postTitle = itemView.findViewById<TextView>(R.id.textView4)
         val postDate = itemView.findViewById<TextView>(R.id.textView5)
+
+
+        // on Click Listener //
+        init {
+
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+        // On Click Listener //
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         val contactView2 = inflater.inflate(R.layout.post_layout, parent, false)
 
-        return ViewHolder(contactView2)
+        return ViewHolder(contactView2, mListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -48,4 +48,16 @@ class PostModel: ViewModel() {
         return posts
     }
 
+    fun deletePost(position: Int){
+        val config = RealmConfiguration.Builder(schema = setOf(realmPostModelObject::class))
+            .build()
+        realm = Realm.open(config)
+
+        realm.writeBlocking {
+            val writeTransactionItems = query<realmPostModelObject>().find()
+            delete(writeTransactionItems[position])
+        }
+        realm.close()
+    }
+
 }

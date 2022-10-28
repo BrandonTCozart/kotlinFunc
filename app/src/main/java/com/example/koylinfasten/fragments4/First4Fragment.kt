@@ -83,6 +83,7 @@ class First4Fragment : Fragment() {
             binding.button20.visibility = View.VISIBLE
             binding.textView3.visibility = View.VISIBLE
             binding.calendarView.visibility =View.INVISIBLE
+            binding.textView3.setText(dtStr)
 
         }
 
