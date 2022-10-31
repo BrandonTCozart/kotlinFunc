@@ -1,9 +1,10 @@
 package com.example.koylinfasten.ViewModels
 
 import androidx.lifecycle.ViewModel
-import com.example.koylinfasten.DBdataModel.realmDataModelObject
+import androidx.work.*
 import com.example.koylinfasten.DBdataModel.realmPostModelObject
 import com.example.koylinfasten.classes.Post
+import com.example.koylinfasten.classes.WorkerWorking
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.ext.query
@@ -15,6 +16,7 @@ class PostModel: ViewModel() {
     lateinit var realm: Realm
 
 
+    // Automatic post //
     fun addPosts(title: String, content: String){
         val config = RealmConfiguration.Builder(schema = setOf(realmPostModelObject::class)).build()
         realm = Realm.open(config)
@@ -59,5 +61,30 @@ class PostModel: ViewModel() {
         }
         realm.close()
     }
+
+
+
+    // Posts when the Internet is on //
+    fun sendPostInfo(title: String, content: String){
+
+        val uploadDataConstraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+
+        val inputData = Data.Builder()
+            .putString("postTitle", title)
+            .putString("postContent", content)
+            .build()
+
+
+        val uploadWorkRequest = OneTimeWorkRequestBuilder<WorkerWorking>()
+            .setConstraints(uploadDataConstraints)
+            .setInputData(inputData)
+            .build()
+
+        WorkManager.getInstance().enqueue(uploadWorkRequest)
+
+
+
+    }
+
 
 }

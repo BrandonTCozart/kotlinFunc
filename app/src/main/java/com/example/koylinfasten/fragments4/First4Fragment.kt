@@ -1,6 +1,7 @@
 package com.example.koylinfasten.fragments4
 
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,9 +33,7 @@ class First4Fragment : Fragment() {
     private val postModel: PostModel by activityViewModels()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentFirst4Binding.inflate(inflater, container, false)
@@ -61,14 +60,24 @@ class First4Fragment : Fragment() {
             var content = binding.editTextTextPersonName6.text.toString()
 
             if(title.isNotEmpty() && content.isNotEmpty()){
-                postModel.addPosts(title, content)
+                //postModel.addPosts(title, content)
+                postModel.sendPostInfo(title, content)
                 binding.editTextTextPersonName5.setText("")
                 binding.editTextTextPersonName6.setText("")
-                Toast.makeText(context, "Posted", Toast.LENGTH_SHORT).show()
+                var cm: ConnectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+                if(cm.activeNetwork != null){
+                    Toast.makeText(context, "Posted", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context, "Will post when online", Toast.LENGTH_SHORT).show()
+                }
+
             }else{
                 Toast.makeText(context, "Fields Empty", Toast.LENGTH_SHORT).show()
             }
         }
+
+
 
         binding.button20.setOnClickListener {
             binding.calendarView.visibility = View.VISIBLE
@@ -86,6 +95,8 @@ class First4Fragment : Fragment() {
             binding.textView3.setText(dtStr)
 
         }
+
+
 
 
     }
