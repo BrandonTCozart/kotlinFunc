@@ -20,7 +20,7 @@ class QuoteModel : ViewModel() {
         // RetroFit //
         // launching a new coroutine
         GlobalScope.launch {
-            val result = quotesApi.getQuotes() // results equals a resonse<quotelist>
+            val result = quotesApi.getQuotes() // results equals a response<quotelist>
             if (result != null) {
                 // Checking the results
                 //.body gives the The deserialized response body of a successful response.
@@ -39,7 +39,7 @@ class QuoteModel : ViewModel() {
         // RetroFit //
         // launching a new coroutine
         GlobalScope.launch {
-            val result2 = quotesApi.getQuotes() // results equals a resonse<quotelist>
+            val result2 = quotesApi.getQuotes() // results equals a response<quotelist>
             if (result2 != null) {
                 // Checking the results
                 //.body gives the The deserialized response body of a successful response.
