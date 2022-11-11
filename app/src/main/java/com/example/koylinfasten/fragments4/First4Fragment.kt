@@ -64,6 +64,7 @@ class First4Fragment : Fragment() {
                 postModel.sendPostInfo(title, content)
                 binding.editTextTextPersonName5.setText("")
                 binding.editTextTextPersonName6.setText("")
+
                 var cm: ConnectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
                 if(cm.activeNetwork != null){

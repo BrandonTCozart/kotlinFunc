@@ -18,6 +18,7 @@ class NoteModel: ViewModel() {
 
 
     fun writeNewNoteToDatabase(titleOfNew: String,textOfNew: String){
+
         val config = RealmConfiguration.Builder(schema = setOf(realmDataModelObject::class))
             .build()
         realm = Realm.open(config)
