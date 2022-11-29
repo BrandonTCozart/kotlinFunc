@@ -54,6 +54,8 @@ class PostAdapter(val mPostArray: ArrayList<Post>): RecyclerView.Adapter<PostAda
         return ViewHolder(contactView2, mListener)
     }
 
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post: Post = mPostArray.get(position)
 
